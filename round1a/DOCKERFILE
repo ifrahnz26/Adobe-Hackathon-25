@@ -1,0 +1,17 @@
+# Use a slim, compatible base image for linux/amd64 [cite: 56]
+FROM --platform=linux/amd64 python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy your solution code into the container
+COPY solution.py .
+
+# The command to run your script when the container starts.
+# This will automatically process PDFs from /app/input as required. 
+CMD ["python", "solution.py"]
+README.md
